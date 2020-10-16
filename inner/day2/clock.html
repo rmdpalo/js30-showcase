@@ -3,22 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>02. JS + CSS Clock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-
+  <div class="clock-container">
     <div class="clock">
       <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
+        <div class="hand hour-hand" id="hour"></div>
+        <div class="hand min-hand" id="minute"></div>
+        <div class="hand second-hand" id="second"></div>
       </div>
     </div>
+    <div class="digital-clock">
+      <h2 id="datetime"></h2>
+    </div>
+  </div>
 
 
   <style>
     html {
-      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background: gold;
       background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
@@ -32,19 +37,20 @@
       flex: 1;
       min-height: 100vh;
       align-items: center;
+      font-family: 'Oswald', sans-serif;
     }
 
     .clock {
       width: 30rem;
       height: 30rem;
-      border: 20px solid white;
+      border: 20px solid black;
       border-radius: 50%;
       margin: 50px auto;
       position: relative;
       padding: 2rem;
       box-shadow:
         0 0 0 4px rgba(0,0,0,0.1),
-        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 0 3px black,
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
     }
@@ -65,7 +71,21 @@
       transform-origin: 100%;
       transform: rotate(90deg);
       transition: all 0.05s;
-      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+      transition-timing-function: cubic-bezier(0, 3.15, 0.54, 0.9);
+      border-radius: 80% 5px 5px 80%
+    }
+
+    .clock-container{
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+    }
+
+    #minute {
+      background: #585252 ;
+    }
+    #second {
+      background: red;
     }
 </style>
 
@@ -94,6 +114,15 @@
 
   setDate();
 
+  function printDate (){
+    var dt = new Date();
+    document.getElementById("datetime").innerHTML = dt.toLocaleString();
+  }
+
+  setInterval(printDate, 1000);
+
+  printDate();
+  
 </script>
 </body>
 </html>
