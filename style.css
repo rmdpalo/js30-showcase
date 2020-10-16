@@ -1,5 +1,5 @@
 body{
-    background-color: gold;
+    background-color: #ffc600;
 }
 .jumbotron {
     display: flex;
@@ -39,14 +39,14 @@ body{
     font-size: 1.25rem;
 }
 h1 {
-    color: gold;
+    color: #ffc600;
     text-align: center;
 }
 nav a {
     color: white;
 }
 nav a :hover {
-    color: gold;
+    color: #ffc600;
 }
 .jumbotron p {
     color: white;
