@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Console Tricks!</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../day4/style.css" />
+  </head>
+  <body>
+    <p onClick="makeInvisible()" class="header font-weight-bolder">
+      Click this to make me invisible.
+    </p>
+    <p class="header font-weight-bolder">
+      Check the console to see me messing around with dev tools!
+    </p>
+    <script>
+      const dogs = [
+        { name: "Snickers", age: 2 },
+        { name: "hugo", age: 8 },
+      ];
+
+      function makeInvisible() {
+        const p = document.querySelector("p");
+        p.style.color = "#ffc600";
+      }
+
+      // Regular
+      console.log("hello");
+
+      // Interpolated
+      console.log("Hello I am a %s string!", "💩");
+
+      // Styled
+      console.log(
+        "%c I am some great text",
+        "font-size: 50px; background: papayawhip; color: black; "
+      );
+
+      // warning!
+      console.warn("uh oh");
+
+      // Error :|
+      console.error("you broke it");
+
+      // Info
+      console.info("I am always studying."); //doesn't work hmmm.
+
+      // Testing
+      // we can test for something and if it is wrong it will throw us an error message
+      const p = document.querySelector("p");
+      console.assert(p.classList.contains("ouch"), "That is wrong!");
+
+      // clearing
+      //console.clear() empties out the console
+
+      // Viewing DOM Elements
+      console.log(p); //shows you the element
+      console.dir(p); //shows you the elements information and methods and etc.
+
+      // Grouping together
+      dogs.forEach((dog) => {
+        console.groupCollapsed(`${dog.name}`);
+        console.log(`This is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old.`);
+        console.log(`${dog.name} is ${dog.age * 7} dog years old.`);
+        console.groupEnd(`${dog.name}`);
+      });
+
+      // counting
+      console.count("Wes");
+      console.count("Steve");
+      console.count("Steve");
+      console.count("Steve");
+      console.count("Steve");
+      console.count("Wes");
+      console.count("Wes");
+      console.count("Wes");
+      console.count("Steve");
+      console.count("Steve");
+      console.count("Wes");
+
+      // timing
+      console.time("fetching data");
+      fetch("https://api.github.com/users/rmdpalo")
+        .then((data) => data.json())
+        .then((data) => {
+          console.timeEnd("fetching data");
+          console.log(data);
+        });
+
+      console.table(dogs);
+    </script>
+  </body>
+</html>
