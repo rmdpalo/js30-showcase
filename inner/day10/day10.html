@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hold Shift to Check Multiple Checkboxes</title>
+  </head>
+  <body>
+    <style>
+      html {
+        font-family: sans-serif;
+        background: #ffc600;
+      }
+
+      .inbox {
+        max-width: 400px;
+        margin: 50px auto;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #f1f1f1;
+      }
+
+      .item:last-child {
+        border-bottom: 0;
+      }
+
+      input:checked + p {
+        background: #f9f9f9;
+        text-decoration: line-through;
+      }
+
+      input[type="checkbox"] {
+        margin: 20px;
+      }
+
+      p {
+        margin: 0;
+        padding: 20px;
+        transition: background 0.2s;
+        flex: 1;
+        font-family: "helvetica neue";
+        font-size: 20px;
+        font-weight: 200;
+        border-left: 1px solid #d1e2ff;
+      }
+      h1 {
+        font-family: "helvetica neue";
+      }
+      header {
+        display: flex;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+    </style>
+    <!--
+   The following is a common layout you would see in an email client.
+   When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
+  -->
+    <header>
+      <h1>My pseudocode as I do this problem.</h1>
+    </header>
+    <div class="inbox">
+      <div class="item">
+        <input type="checkbox" />
+        <p>Select all checkboxes and store them in a variable.</p>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <p>Add eventListeners to all of them.</p>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <p>
+          At the occurence of an event call your function that handles logic.
+        </p>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <p>
+          In that function check if they had shift pressed down AND that they're
+          checking it.
+        </p>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <p>
+          If it meets those two, we now want to check if it's in between the
+          checkboxes we initially clicked and the second we shift clicked.
+        </p>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <p>
+          For each checkbox we check if it's either the first or last checkbox
+          we clicked.
+        </p>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <p>Then identify ourselves as in between and flip it to true.</p>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <p>
+          Once we finally reach the latest checkbox clicked, flip in between to
+          false and it will stop checking boxes after this point.
+        </p>
+      </div>
+      <div class="item">
+        <input type="checkbox" />
+        <p>Hold shift to select all should be working.</p>
+      </div>
+    </div>
+
+    <script>
+      const checkboxes = document.querySelectorAll(
+        '.inbox input[type="checkbox"'
+      );
+
+      let lastChecked;
+      let inBetween = false;
+
+      function handleCheck(e) {
+        if (e.shiftKey && this.checked === true) {
+          checkboxes.forEach((checkbox) => {
+            if (checkbox === this || checkbox === lastChecked) {
+              inBetween = !inBetween;
+            }
+            if (inBetween === true) {
+              checkbox.checked = true;
+            }
+          });
+        }
+        lastChecked = this;
+      }
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("click", handleCheck);
+      });
+    </script>
+  </body>
+</html>
